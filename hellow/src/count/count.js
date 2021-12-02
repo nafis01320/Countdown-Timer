@@ -2,23 +2,35 @@ import React,{useState} from 'react'
 import './count.css'
 const Count = () => {
     const[data, setData] = useState();
+    const [int, setInt] = useState();
+    // int == setInterVal
     function afterClick(){
         let conv = parseInt(data);
-         
-        while(conv > 0){
-            setTimeout(function(){
-                conv = conv -1;
-            },1000)
+       
 
+            let interVal = setInterval(function(){
+                if(conv > 0){
+
+                    conv += -1;
+                    setData(conv);
+                    
+                    
+                } 
+            },1000);
+            setInt(interVal);
             
-            setData(conv);
-        }
-            
+                  
 
-        console.log(conv)
-        console.log(typeof(conv))
-        
+    }
+    function pause(){ 
+        // int == interVal
+        clearInterval(int);
 
+    }
+
+    function reset(){
+        pause();
+        setData('');
     }
     return (
         <>
@@ -33,8 +45,8 @@ const Count = () => {
                     </div>
                     <div className='logicBtn'>
                         <button className='button' onClick={afterClick}>Start</button>
-                        <button className='button'>Reset</button>
-                        <button className='button'>Pause</button>
+                        <button className='button' onClick={reset}>Reset</button>
+                        <button className='button' onClick={pause}>Pause</button>
                     </div>
                 </div>
             </section>
